@@ -15,7 +15,7 @@ const allowedOrigins = [
 dotenv.config();
 
 app.use(cors({
-  origin: "https://your-frontend-on-vercel.vercel.app", // e.g., "https://your-frontend-on-vercel.vercel.app"
+  origin: "https://notes-fullstack-frontend.vercel.app",
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
