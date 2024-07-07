@@ -9,7 +9,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "typeRoots": ["./node_modules/@types"],
-    "types": ["node", "express", "jsonwebtoken"]
+    // "types": ["node", "express", "jsonwebtoken"]
   },
   "include": ["./src", "./src/types.d.ts"]
 }
