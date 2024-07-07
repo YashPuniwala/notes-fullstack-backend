@@ -7,6 +7,7 @@ const JWT_SECRET_KEY = "d9uasind83287fun723j9f83hf8nyviu2j89jfpopk90cw432f";
 const JWT_REFRESH_KEY = "FDSK90FK0M8IM29823FN892N38F8923JN822";
 const ACCESS_TOKEN_EXPIRATION = "5m"; // 2 minutes
 const REFRESH_TOKEN_EXPIRATION = "40m"; // 5 minutes
+const isProduction = process.env.NODE_ENV === "production";
 
 export const register = async (
   req: Request,
@@ -41,15 +42,11 @@ export const register = async (
   return res.status(201).json({ message: user });
 };
 
-export const login = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: "Please enter all field" });
+    return res.status(400).json({ message: "Please enter all fields" });
   }
 
   const user = await User.findOne({ email }).select("+password");
@@ -58,7 +55,6 @@ export const login = async (
     return res.status(401).json({ message: "User Doesn't Exist" });
   }
 
-  // const isMatch = await user.comparePassword(password);
   const isMatch = bcrypt.compareSync(password, user.password);
 
   if (!isMatch) {
@@ -75,18 +71,16 @@ export const login = async (
 
   res.cookie("accessToken", String(accessToken), {
     httpOnly: true,
-      secure: true,
-      sameSite: 'lax',
-      maxAge: 15 * 60 * 1000, // 15 minutes
-    // secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax', // Use lowercase values
+    maxAge: 15 * 60 * 1000, // 15 minutes
   });
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-      secure: true,
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    // secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax', // Use lowercase values
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
   return res.status(200).json({ message: "Successfully logged in", user });
