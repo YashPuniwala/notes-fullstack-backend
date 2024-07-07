@@ -14,7 +14,7 @@ const allowedOrigins = [
 
 // dotenv.config();
 
-app.use(cors({ credentials: true, origin: "https://notes-fullstack-frontend.vercel.app/" }));
+app.use(cors({ credentials: true, origin: "https://notes-fullstack-frontend.vercel.app" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);
