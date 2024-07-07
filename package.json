@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.ts",
     "start": "node ./dist/app.js",
@@ -21,13 +22,12 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mongoose": "^5.11.97",
     "@types/multer": "^1.4.11",
-    "@types/node": "^20.14.10",
     "@types/validator": "^13.11.9",
     "nodemon": "^3.1.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "@types/node": "^20.14.10",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.0.3",
     "cookie-parser": "^1.4.6",
@@ -38,7 +38,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.2",
     "multer": "^1.4.5-lts.1",
+    "postinstall": "^0.10.3",
     "slugify": "^1.6.6",
+    "typescript": "^5.4.2",
     "validator": "^13.11.0"
   }
 }
