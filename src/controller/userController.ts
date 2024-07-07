@@ -78,7 +78,7 @@ export const login = async (
     expires: new Date(Date.now() + 5 * 60 * 1000), // Expires in 5 minutes
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
+    // secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
   });
 
   res.cookie("refreshToken", refreshToken, {
@@ -86,7 +86,7 @@ export const login = async (
     expires: new Date(Date.now() + 40 * 60 * 1000), // Expires in 5 minutes
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
+    // secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
   });
 
   return res.status(200).json({ message: "Successfully logged in", user });
