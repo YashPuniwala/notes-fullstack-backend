@@ -74,19 +74,19 @@ export const login = async (
   });
 
   res.cookie("accessToken", String(accessToken), {
-    path: "/",
-    expires: new Date(Date.now() + 5 * 60 * 1000), // Expires in 5 minutes
     httpOnly: true,
-    sameSite: "lax",
-    // secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
+    // secure: true,
+    sameSite: 'none',
+    maxAge: 15 * 60 * 1000, // 15 minutes
+    secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
   });
 
   res.cookie("refreshToken", refreshToken, {
-    path: "/",
-    expires: new Date(Date.now() + 40 * 60 * 1000), // Expires in 5 minutes
     httpOnly: true,
-    sameSite: "lax",
-    // secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
+    // secure: true,
+    sameSite: 'none',
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
   });
 
   return res.status(200).json({ message: "Successfully logged in", user });

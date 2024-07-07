@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import router from "./route/userRoute";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-// import dotenv from "dotenv"
+import dotenv from "dotenv"
 
 const app = express();
 const allowedOrigins = [
@@ -12,9 +12,14 @@ const allowedOrigins = [
   // "https://notes-fullstack-frontend.vercel.app"
 ];
 
-// dotenv.config();
+dotenv.config();
 
-app.use(cors({ credentials: true, origin: "https://notes-fullstack-frontend.vercel.app" }));
+app.use(cors({
+  origin: "https://notes-fullstack-frontend.vercel.app", // e.g., "https://your-frontend-on-vercel.vercel.app"
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);
