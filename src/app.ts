@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import router from "./route/userRoute";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import dotenv from "dotenv"
+// import dotenv from "dotenv"
 
 const app = express();
 const allowedOrigins = [
@@ -12,7 +12,7 @@ const allowedOrigins = [
   // "https://notes-fullstack-frontend.vercel.app"
 ];
 
-dotenv.config();
+// dotenv.config();
 
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
