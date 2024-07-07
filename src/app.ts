@@ -15,12 +15,11 @@ const allowedOrigins = [
 dotenv.config();
 
 app.use(cors({
-  origin: "https://notes-fullstack-frontend.vercel.app", // e.g., "https://your-frontend-on-vercel.vercel.app"
+  origin: "https://your-frontend-on-vercel.vercel.app", // e.g., "https://your-frontend-on-vercel.vercel.app"
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
-}));
-app.use(express.json());
+}));app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);
 

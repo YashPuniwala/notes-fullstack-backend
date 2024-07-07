@@ -75,17 +75,17 @@ export const login = async (
 
   res.cookie("accessToken", String(accessToken), {
     httpOnly: true,
-    // secure: true,
-    sameSite: 'none',
-    maxAge: 15 * 60 * 1000, // 15 minutes
+      // secure: true,
+      sameSite: 'none',
+      maxAge: 15 * 60 * 1000, // 15 minutes
     secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
   });
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    // secure: true,
-    sameSite: 'none',
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // secure: true,
+      sameSite: 'none',
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     secure: process.env.NODE_ENV === "production", // Ensure secure flag for production
   });
 
