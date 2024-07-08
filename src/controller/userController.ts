@@ -69,19 +69,28 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     expiresIn: REFRESH_TOKEN_EXPIRATION,
   });
 
-  res.cookie("accessToken", String(accessToken), {
+  res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? 'none' : 'lax', // Use lowercase values
-    maxAge: 15 * 60 * 1000, // 15 minutes
+    // secure: isProduction,
+    secure: true,
+    // sameSite: isProduction ? 'none' : 'lax',
+    sameSite: "none",
+    maxAge: 15 * 60 * 1000,
+    path: '/',
   });
-
+  console.log("Access token cookie set", accessToken);
+  
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? 'none' : 'lax', // Use lowercase values
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    // secure: isProduction,
+    secure: true,
+    // sameSite: isProduction ? 'none' : 'lax',
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: '/',
   });
+  console.log("Access token cookie set", accessToken);
+  console.log("Refresh token cookie set", refreshToken);
 
   return res.status(200).json({ message: "Successfully logged in", user });
 };
@@ -206,7 +215,7 @@ export const refreshToken = (
     expires: new Date(Date.now() + 5 * 50 * 1000), // Expires in 10 minutes
     // Expires in 30 seconds
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "none",
   });
 
   return res
